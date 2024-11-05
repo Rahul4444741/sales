@@ -1,0 +1,174 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "jasmine": true
+  },
+  // "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "allowAutomaticSingleRunInference": true,
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "import", "react-hooks"],
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    // "airbnb-typescript"
+  ],
+  "ignorePatterns": ["**/node_modules/**", "**/dist/**", "**/schematics/*/*/files/**"],
+  "rules": {
+    // Very slow rules that don't provide much value that TSC can't catch
+    "import/no-unresolved": "off",
+    "import/no-cycle": "off",
+    "no-use-before-define": "off",
+    "no-unused-vars": "warn",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    // Nest Preferences
+    // Needed for Nest injection
+    "no-useless-constructor": 0,
+    // Prevent certain libraries from being imported
+    "no-restricted-imports": ["error", { "paths": [] }],
+    // Needed to import Nest Testing
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*spec.ts",
+          "**/*.spec.tsx",
+          "**/*.mock.ts",
+          "**/*.mock.tsx",
+          "apps/*/src/pollinate/**",
+          "**/cloudfront.ts"
+        ]
+      }
+    ],
+    "no-empty-function": 1,
+    "func-names": ["error", "always"],
+    "max-len": [
+      "error",
+      120,
+      2,
+      {
+        "ignoreComments": false,
+        "ignoreRegExpLiterals": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreUrls": true
+      }
+    ],
+    // Handled much, much better by a type system
+    "consistent-return": "off",
+    // Typescript can do exhaustiveness checking with switch/case, making it so
+    // that you can cause a compile error if someone adds a new enum variant.
+    "default-case": "off",
+    // Just not practical
+    "class-methods-use-this": 0,
+    // Standard Nest class definition
+    "import/prefer-default-export": 0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    // Code Quality
+    "max-lines": [
+      "warn",
+      250
+      // "error",
+      // 400
+    ],
+    "max-statements": [
+      "warn",
+      15
+      // "error",
+      // 20
+    ],
+    "max-params": [
+      "warn",
+      7
+      // "error",
+      // 12
+    ],
+    "complexity": [
+      "warn",
+      10
+      // "error",
+      // 20
+    ],
+    "no-debugger": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "import/no-named-as-default": 0,
+    "react-hooks/exhaustive-deps": "warn",
+    "camelcase": "warn",
+    "no-dupe-keys": "warn",
+    "import/order": [
+      "warn"
+    ],
+    "import/newline-after-import": [
+      "warn",
+      {
+        "count": 1
+      }
+    ],
+    "no-multiple-empty-lines": "warn",
+    "no-shadow": "warn",
+    "no-nested-ternary": "warn",
+    "eqeqeq": "warn",
+    "import/no-dynamic-require": "warn",
+    "global-require": "warn",
+  },
+  "settings": {
+    "react": {
+      "version": "18.0.0"
+    },
+    "import/extensions": [".ts", ".tsx", ".js", ".jsx"]
+  },
+  "overrides": [
+    {
+      // Code Quality Overrides for Tests case files
+      "files": [
+        "**/*spec.ts",
+        "**/*.spec.tsx",
+        "**/*.mock.ts",
+        "**/*.mock.tsx",
+        "**/setupTests.ts",
+        "**/test-helpers/**",
+        "**/*.config.js"
+      ],
+      "rules": {
+        "max-classes-per-file": "off",
+        "max-lines": ["warn", 500],
+        "max-statements": "off",
+        "max-params": "off",
+        "no-import-assign": "off",
+        "import/first": "warn",
+        "import/no-extraneous-dependencies": "off",
+        "func-names": "off"
+      }
+    },
+    {
+      "files": [
+        "*.jsx"
+      ],
+      "rules": {
+        "max-lines": [
+          "warn",
+          500
+        ],
+        "max-statements": [
+          "warn",
+          20
+        ]
+      }
+    },
+  ]
+}
